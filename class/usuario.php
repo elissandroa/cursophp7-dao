@@ -58,11 +58,49 @@ class Usuario {
 
 	}
 
+
+	public static function getList(){
+		
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuario ORDER BY nome");
+	}
+
+	public static function search($nome){
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuario WHERE nome LIKE :SEARCH ORDER BY nome", array(
+				":SEARCH"=>"%".$nome."%"
+			));
+	}
+
+	public function login($nome, $senha){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_usuario WHERE nome = :NOME AND senha = :SENHA", array(
+			":NOME"=>$nome,
+			":SENHA"=>$senha
+		));
+
+		if(isset($results[0])){
+			$row = $results[0];
+
+			$this->setId_user($row['id_user']);
+			$this->setNome($row['nome']);
+			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+		} else {
+			throw new Exception("Login e/ou senha inválidos");
+			
+		} 
+	}
+
+
 	public function __toString(){
 		return json_encode(array(
 			"id_user"=>$this->getId_user(),
 			"nome"=>$this->getNome(),
-			"senha"=>$this->getSenha(),
 			"dtcadastro"=>$this->getDtcadastro()->format("d/m/Y H:i:s")
 		));
 	}
