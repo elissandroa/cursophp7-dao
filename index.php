@@ -25,10 +25,28 @@ echo json_encode($lista);*/
 
 //Carrega usuario usando login e senha
 
+//$usuario = new Usuario();
+
+//$usuario->login("jamil", "nhaPower");
+
+//echo $usuario;
+
+//Inserindo um usuário
+
+//$aluno = new Usuario("Aluno", "SenhaComConsrutor");
+
+//$aluno->insert();
+
+//echo $aluno;
+
+//Atualizando um usuário
+
 $usuario = new Usuario();
 
-$usuario->login("jamil", "nhaPower");
+$usuario->loadById(8);
+
+$usuario->update("Carmelo", "Carmelo123");
 
 echo $usuario;
 
- ?>
+?>
