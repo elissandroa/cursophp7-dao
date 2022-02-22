@@ -129,6 +129,21 @@ class Usuario {
 		));
 	}
 
+	public function delete(){
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuario WHERE id_user = :ID", array(
+
+			":ID"=>$this->getId_user()
+		));
+
+		$this->setId_user = 0;
+		$this->setNome = "";
+		$this->setSenha = "";
+		$this->setDtcadastro(new DateTime());
+	}
+
 	public function __construct($nome = "", $senha = ""){
 		$this->setNome($nome);
 		$this->setSenha($senha);

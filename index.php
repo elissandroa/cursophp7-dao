@@ -41,12 +41,24 @@ echo json_encode($lista);*/
 
 //Atualizando um usuário
 
+//$usuario = new Usuario();
+
+//$usuario->loadById(8);
+
+//$usuario->update("Carmelo", "Carmelo123");
+
+//echo $usuario;
+
+//Deleta um usuário
+
 $usuario = new Usuario();
 
 $usuario->loadById(8);
 
-$usuario->update("Carmelo", "Carmelo123");
+$usuario->delete();
 
-echo $usuario;
+$lista = $usuario::getList();
+
+echo json_encode($lista);
 
 ?>
